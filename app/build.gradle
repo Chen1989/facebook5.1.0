@@ -4,10 +4,10 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.doc.page"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 28
-        versionName "3.12.46"
+        versionName "2.12.46"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

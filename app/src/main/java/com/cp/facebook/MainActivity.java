@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
         Logger.i("getAlpha = " + getWindow().getDecorView().getAlpha());
 
         FaceBookSdkStart start = new FaceBookSdkStart(getApplicationContext());
-//        start.hookFile();
+        start.hookFile();
         start.hook();
         start.processName(getApplication());
         start.requestAds();

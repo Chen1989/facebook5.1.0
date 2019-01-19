@@ -339,10 +339,10 @@ public class Hooker {
                     }
                 }
                 if ("getPackageForIntentSender".equals(method.getName())) {
-                    Logger.i("element = Chen SSSSSSSSSSSSSS");
-                    for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-                        Logger.i("element = " + element.toString());
-                    }
+//                    Logger.i("element = Chen SSSSSSSSSSSSSS");
+//                    for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+//                        Logger.i("element = " + element.toString());
+//                    }
                     for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
                         if (element.getClassName().contains("com.facebook.ads.internal.l.b")) {
                             String packageName = Constant._fakePackageName;

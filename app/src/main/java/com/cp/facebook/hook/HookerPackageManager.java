@@ -12,14 +12,12 @@ import com.cp.facebook.util.Constant;
 import com.cp.facebook.util.Logger;
 
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Arrays;
 
 
 public class HookerPackageManager
@@ -75,10 +73,10 @@ public class HookerPackageManager
                     }
                 }
                 if ("getPackageInfo".equals(method.getName())) {
-                    for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-                        Logger.i("getPackageInfo = " + element.toString());
-                    }
-                    Logger.i("getPackageInfo ============================== " + Arrays.asList(args).toString());
+//                    for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+//                        Logger.i("getPackageInfo = " + element.toString());
+//                    }
+//                    Logger.i("getPackageInfo ============================== " + Arrays.asList(args).toString());
 
                     String name = "AZeroPlug";
                     if (("FSixPlug".equals(name) || ("AZeroPlug".equals(name))) && args[0] instanceof String)
@@ -126,11 +124,11 @@ public class HookerPackageManager
                         }
                     }
                     if ("getApplicationInfo".equals(method.getName())) {
-                        for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-                            Logger.i("PackageManager1 getApplicationInfo = " + element.toString());
-                        }
-                        Logger.i("PackageManager1 getApplicationInfo ============================== ");
-                        Logger.i("PackageManager1 args " + Arrays.asList(args).toString() + realpkg + newpkg);
+//                        for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+//                            Logger.i("PackageManager1 getApplicationInfo = " + element.toString());
+//                        }
+//                        Logger.i("PackageManager1 getApplicationInfo ============================== ");
+//                        Logger.i("PackageManager1 args " + Arrays.asList(args).toString() + realpkg + newpkg);
                         for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
                             if (element.toString().contains("com.facebook.ads.internal.l.b")
                                     || element.toString().contains("org.chromium")) {
@@ -160,12 +158,11 @@ public class HookerPackageManager
                                             invoke.labelRes = 0;
                                             invoke.nonLocalizedLabel = null;
                                             if (Build.VERSION.SDK_INT >= 24) {
-                                                invoke.minSdkVersion = 20;
+                                                invoke.minSdkVersion = Constant._fakeMinAppVersion;
                                             }
-                                            String filePath = context.getFilesDir() + File.separator + "chen.apk";
-                                            invoke.publicSourceDir = filePath;
+                                            invoke.publicSourceDir = Constant._fakePublicSourceDir;
                                             Logger.i("PackageManager1 publicSourceDir = " + invoke.publicSourceDir);
-                                            writeFBFile(filePath);
+//                                            writeFBFile(filePath);
                                             return invoke;
                                         }
                                     }

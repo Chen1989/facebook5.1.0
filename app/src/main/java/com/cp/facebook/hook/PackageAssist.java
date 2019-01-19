@@ -199,10 +199,10 @@ public class PackageAssist {
 //            if (realPkg.equals(providerPName) || TextUtils.isEmpty(providerPName)) {
 //                return realPkg;
 //            }
-            for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-                Logger.i("getPackageName = " + element.toString());
-            }
-            Logger.i("getPackageName ============================== ");
+//            for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+//                Logger.i("getPackageName = " + element.toString());
+//            }
+//            Logger.i("getPackageName ============================== ");
 
             StackTraceElement[] traceElements = Thread.currentThread().getStackTrace();
             for (int i = 0; i <  traceElements.length; i++) {
@@ -268,10 +268,10 @@ public class PackageAssist {
 
         @Override
         public ApplicationInfo getApplicationInfo() {
-            for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-                Logger.i("getApplicationInfo = " + element.toString());
-            }
-            Logger.i("getApplicationInfo ============================== ");
+//            for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+//                Logger.i("getApplicationInfo = " + element.toString());
+//            }
+//            Logger.i("getApplicationInfo ============================== ");
 
             if (realPkg.equals(providerPName) || TextUtils.isEmpty(providerPName)) {
                 return super.getApplicationInfo();

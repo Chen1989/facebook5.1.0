@@ -3,6 +3,7 @@ package com.cp.facebook.hook;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 
+import com.cp.facebook.util.Constant;
 import com.cp.facebook.util.Logger;
 
 import java.lang.reflect.Field;
@@ -49,7 +50,7 @@ public class SdkSharedPreference implements SharedPreferences {
                         Class cl = Class.forName("com.facebook.ads.internal.w.b.d");
                         Field version = cl.getDeclaredField("b");
                         version.setAccessible(true);
-                        version.set(null, 20);
+                        version.set(null, Constant._fakeMinAppVersion);
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     } catch (NoSuchFieldException e) {

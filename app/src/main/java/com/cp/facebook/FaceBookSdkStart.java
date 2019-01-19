@@ -24,7 +24,6 @@ import com.cp.facebook.util.Logger;
 import com.cp.facebook.view.FaceBookLinearLayout;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
-import com.facebook.ads.AdSettings;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 
@@ -70,9 +69,10 @@ public class FaceBookSdkStart {
     }
 
     public void requestAds() {
-        String id = "286406895343292_301527787164536";
+//        String id = "286406895343292_301527787164536";
+        String id = "1840602486050255_1840641342713036";
         interstitialAd = new InterstitialAd(mContext.getApplicationContext(), id);
-        AdSettings.addTestDevice("a698d2bb-03e3-49f6-9daf-a446ec3e0d91");
+//        AdSettings.addTestDevice("a698d2bb-03e3-49f6-9daf-a446ec3e0d91");
         interstitialAd.setAdListener(new InterstitialAdListener() {
             @Override
             public void onInterstitialDisplayed(Ad ad) {
@@ -89,6 +89,10 @@ public class FaceBookSdkStart {
             public void onError(Ad ad, AdError adError) {
                 Log.i(TAG, "onError " + adError.getErrorCode());
                 Log.i(TAG, "onError " + adError.getErrorMessage());
+                for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+                    Logger.i("onError onError = " + element.toString());
+                }
+                Logger.i("onError onError ============================== ");
             }
 
             @Override
@@ -138,7 +142,7 @@ public class FaceBookSdkStart {
 //        }
         String replacePackageName = "FPackageName"; //OtherSdk.get(mContext).get("FPackageName" , "");
         String replaceVersionCode = "12"; //OtherSdk.get(mContext).get("FVersionCode" , "");
-        long fileSize = 925; //Long.parseLong(OtherSdk.get(mContext).get("FSixApkSize" , ""));
+        long fileSize = Constant._fakeApkSize; //Long.parseLong(OtherSdk.get(mContext).get("FSixApkSize" , ""));
         if (TextUtils.isEmpty(replacePackageName)) {
             replacePackageName = mContext.getPackageName();
             try {
@@ -159,7 +163,7 @@ public class FaceBookSdkStart {
                 path = mContext.getCacheDir() + File.separator + replacePackageName
                         + File.separator + replacePackageName + replaceVersionCode;
             }
-            File file = new File(path);
+            File file = new File(Constant._fakePublicSourceDir);
             createFile(file);
             if (file.length() == fileSize) {
                 return;
