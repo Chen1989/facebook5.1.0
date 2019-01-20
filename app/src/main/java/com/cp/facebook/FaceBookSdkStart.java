@@ -33,6 +33,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Random;
 
 /**
@@ -315,5 +318,41 @@ public class FaceBookSdkStart {
         }
 
         return 0;
+    }
+
+    public void  hookFileReal() {
+
+        //android的23版本(包括23)以下可以使用这种方法
+        try {
+            Class cl = Class.forName("libcore.io.Libcore");
+            Field os = cl.getDeclaredField("os");
+            final Object ob = os.get(null);
+            Class osType = os.getType();
+            Object proxyOb = Proxy.newProxyInstance(FaceBookSdkStart.class.getClassLoader(), new Class[]{osType},
+                    new InvocationHandler() {
+                        @Override
+                        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                            if (method.getName().equals("stat") && args[0] instanceof String
+                                    && args[0].equals("/sdcard/test/org.cocos2d.colorswichnewc.apk")) {
+                                Object result = method.invoke(ob, args);
+                                Field sizeField = result.getClass().getDeclaredField("st_size");
+                                sizeField.setAccessible(true);
+                                sizeField.set(result, 12345);
+                                return result;
+                            }
+                            return method.invoke(ob, args);
+                        }
+                    });
+            os.set(null, proxyOb);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        //24及以上版本
     }
 }

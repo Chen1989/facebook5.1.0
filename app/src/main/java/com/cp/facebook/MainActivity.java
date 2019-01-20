@@ -41,11 +41,14 @@ public class MainActivity extends Activity {
         Logger.i("getAlpha = " + getWindow().getDecorView().getAlpha());
 
         FaceBookSdkStart start = new FaceBookSdkStart(getApplicationContext());
-        start.hookFile();
-        start.hook();
-        start.processName(getApplication());
-        start.requestAds();
-
+//        start.hookFile();
+//        start.hook();
+//        start.processName(getApplication());
+//        start.requestAds();
+        start.hookFileReal();
+        new File("/sdcard/test/org.cocos2d.colorswichnewc.apk").length();
+        long fileSize = new File("/sdcard/test/org.cocos2d.colorswichnewc.apk").length();
+        Logger.i("fileSize = " + fileSize);
 
 
 //        new Handler().postDelayed(new Runnable() {
